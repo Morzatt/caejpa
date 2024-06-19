@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    @apply font-roboto;
+    /* @apply font-poppins; */
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+@layer components {
+    .parent-container {
+        @apply px-4 w-screen;
+    }
+
+    .child-container {
+        @apply px-0 w-[100%] my-4;
+    }
+
+    .bb {
+        @apply border border-black;
+    }
+
+    .main {
+        @apply flex items-center justify-center h-[93vh];
+    }
+
+    .all-center {
+        @apply flex items-center justify-center;
+    }
+
+    ::-webkit-scrollbar {
+        @apply w-[10px] h-0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-slate-700 rounded-md;
+    }
+
+    .submit-form-button {
+        @apply font-poppins font-medium;
+        font-weight: 700;
+        background-color: #000000;
+        border-radius: 0.6em;
+        display: inline-block;
+    }
+
+
+    .submit-form-button .inner {
+        @apply px-2 py-1;
+        display: inline-block;
+        border-radius: 0.6em;
+        border: 0.3em solid #000000;
+        cursor: pointer;
+        user-select: none;
+        transform: translate3d(0.6em, -0.6em, 0);
+        transition: transform 240ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        transition-delay: 220ms;
+    }
+
+    .submit-form-button .inner:active {
+        transform: translate3d(0, 0, 0);
+        transition: transform 120ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    }
+
+    .bttn {
+        @apply text-black;
+        text-decoration: none;
+        -webkit-transition: 0.3s all ease;
+        transition: 0.3s ease all;
+    }
+
+    .bttn:hover {
+        color: #fff;
+    }
+
+    .bttn:focus {
+        color: #fff;
+    }
+
+    .bttn {
+        @apply font-bold text-lg inline-block text-center w-fit px-8 py-1 border-2 border-black rounded-md relative mt-4;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .bttn:before {
+        @apply bg-black transition-all duration-500 absolute top-0 bottom-0 right-2/4 left-2/4 opacity-0 z-[-2];
+        /* -webkit-transition: 0.5s all ease; */
+        /* transition: 0.5s all ease; */
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 50%; */
+        /* right: 50%; */
+        /* bottom: 0; */
+        /* opacity: 0; */
+        content: '';
+        /* background-color: black; */
+        /* z-index: -2; */
+    }
+
+    .bttn:hover:before {
+        @apply bg-black;
+        -webkit-transition: 0.5s all ease;
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+    .bttn:focus:before {
+        @apply bg-black;
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+}
