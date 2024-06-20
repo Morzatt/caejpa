@@ -46,12 +46,12 @@ This app needs the following environment Variables
 
 - `NODE_ENV` node environment configuration.
 - `PORT` Port for the HTTP Express Server.
-- `HOST` Port for the HTTP Express Server.
+- `HOST` Host for the HTTP Express Server.
 - `COOKIE_SECRET` Secret to code and decode cookies.
 - `DBHOST` Database Host.
 - `DBUSER` Database User.
 - `DBPORT` Database Port.
-- `DBPWD` Databse Password.
+- `DBPWD` Database Password.
 - `DBNAME` Database's Name.
 
 ### App Preview
