@@ -12,7 +12,7 @@ const assert_1 = __importDefault(require("assert"));
 dotenv_1.default.config();
 const { PORT, HOST, HOST_URL, COOKIE_SECRET, DBHOST, DBUSER, DBPWD, DBNAME, DBPORT } = process.env;
 const COOKIE_CONFIG = {
-    maxAge: 1000 * 60 * 15,
+    maxAge: 1000 * 60 * 15, // would expire after 15 minutes
     signed: true // Indicates if the cookie should be signed
 };
 (0, assert_1.default)(PORT, "PORT is required");

@@ -80,11 +80,11 @@ function createIndividualdDocDefinition(prestamo) {
                         canvas: [
                             {
                                 type: 'line',
-                                x1: 0,
-                                y1: 50,
-                                x2: 150,
-                                y2: 50,
-                                lineWidth: 1,
+                                x1: 0, // Starting x-coordinate
+                                y1: 50, // Starting y-coordinate
+                                x2: 150, // Ending x-coordinate (595 is the width of A4 paper)
+                                y2: 50, // Ending y-coordinate
+                                lineWidth: 1, // Line width
                                 lineColor: 'black' // Line color
                             },
                         ],
@@ -95,11 +95,11 @@ function createIndividualdDocDefinition(prestamo) {
                         canvas: [
                             {
                                 type: 'line',
-                                x1: 0,
-                                y1: 50,
-                                x2: 150,
-                                y2: 50,
-                                lineWidth: 1,
+                                x1: 0, // Starting x-coordinate
+                                y1: 50, // Starting y-coordinate
+                                x2: 150, // Ending x-coordinate (595 is the width of A4 paper)
+                                y2: 50, // Ending y-coordinate
+                                lineWidth: 1, // Line width
                                 lineColor: 'black' // Line color
                             }
                         ]

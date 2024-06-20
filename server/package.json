@@ -5,8 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "vitest",
-    "dev": "tsc && node .",
-    "nodemon": "nodemon ./dist/index.js"
+    "nodemon": "nodemon ./dist/index.js",
+    "tsc": "tsc --watch",
+    "dev": "start npm run nodemon & npm run tsc"
   },
   "author": "",
   "license": "ISC",

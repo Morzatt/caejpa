@@ -1,0 +1,29 @@
+{
+  "name": "caejpa",
+  "version": "1.0.0",
+  "description": "Management & Administration Web Application CAEJPA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-dev": "cd cliente && npm run dev -- --open",
+    "server-dev": "cd server && npm run dev",
+    "client": "cd cliente && npm run preview -- --open",
+    "server": "cd server && node .",
+    "dev": "start npm run client-dev && npm run server-dev",
+    "start": "start npm run server && npm run client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Morzatt/caejpa.git"
+  },
+  "keywords": [
+    "Management",
+    "Administration"
+  ],
+  "author": "Carlos Tineo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Morzatt/caejpa/issues"
+  },
+  "homepage": "https://github.com/Morzatt/caejpa#readme"
+}
