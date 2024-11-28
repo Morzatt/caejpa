@@ -5,4 +5,4 @@ export const load = ( () => {
 }) satisfies LayoutLoad;
 
 export const ssr = false;
-
+export let prerender = true; 

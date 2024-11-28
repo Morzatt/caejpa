@@ -1,5 +1,7 @@
+import { base } from "$lib/index"
+
 async function setPermission() {
-    const res = await fetch("http://localhost:2606/login/render", {
+    const res = await fetch(`${base}/login/render`, {
         method: "POST",
         credentials: "include",
         headers: {

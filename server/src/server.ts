@@ -4,14 +4,14 @@
 // index.ts file
 import config from "./config"
 import express from "express";
-import { router, login, register, logout, prestamos, variables, backup, afiliados, retiros, usuarios } from "./routes"; //Routes import
+import { login, register, logout, prestamos, variables, backup, afiliados, retiros, usuarios } from "./routes"; //Routes import
 import cors from "cors"
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import path from "path";
 
 const app = express();
-const mainPage = router;
 
 app.use(cookieParser())
 app.use(cors({
@@ -28,10 +28,7 @@ app.use(session({
     }
 }));
 app.use(fileUpload())
-app.use(express.static('public'))
 
-
-app.use("/", mainPage)
 app.use("/register", register)
 app.use("/login", login)
 app.use("/logout", logout)

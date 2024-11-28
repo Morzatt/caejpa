@@ -7,6 +7,7 @@
     import type { PageData } from './$types';
     export let data: PageData;
     import contactIcon from "$lib/images/id_card_FILL0_wght400_GRAD0_opsz24.svg"
+    import { base } from '$lib';
 
     const images = data.images
 
@@ -55,7 +56,7 @@
     let afiliate: boolean = false;
     async function handleSubmit() {
         try {
-            const response = await fetch(`http://localhost:2606/prestamos?afiliate=${afiliate}`, {
+            const response = await fetch(`${base}/prestamos?afiliate=${afiliate}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +106,7 @@
         getUpButton.onclick = function() {
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth' // Opcional: para un desplazamiento suave
+                behavior: 'smooth'
             });
         };        
     }

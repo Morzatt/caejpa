@@ -55,7 +55,7 @@ export let sidebarSections: sidebarSections[] = [
         routes: [
             {
                 routeName: "Nuevo Retiro",
-                path: "/retiros",
+                path: "/retiro",
                 routeLogo: retirosIcon,
                 access: ["Administrador", "Auditor", "Editor"],
             },

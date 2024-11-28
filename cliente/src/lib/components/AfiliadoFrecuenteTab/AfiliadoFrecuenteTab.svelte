@@ -8,6 +8,7 @@
     import closeIcon from "$lib/images/close_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import searchIcon from "$lib/images/search_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import arrowDown from "$lib/images/expand_more_FILL0_wght400_GRAD0_opsz24.svg"
+    import { base } from "$lib";
 
     function closeTab() {
         afiliadoDataStore.update(afiliado => {
@@ -79,7 +80,7 @@
 
     let search: string = ""; 
     async function getAfiliadosFrecuentes(): Promise<Afiliado[]> {
-        const response = await fetch(`http://localhost:2606/afiliados?searchParams=${search.toLowerCase()}`)
+        const response = await fetch(`${base}/afiliados?searchParams=${search.toLowerCase()}`)
         const data: Afiliado[] = await response.json()
         const sorted = sortArr(data, campo, orden)
         
@@ -88,7 +89,7 @@
 
     let operationCounter = 0
     async function deleteAfiliado(cedula: string) {
-        const response = await fetch(`http://localhost:2606/afiliados/${cedula}`, {
+        const response = await fetch(`${base}/afiliados/${cedula}`, {
             method: "DELETE"
         })
         const data = await response.json()

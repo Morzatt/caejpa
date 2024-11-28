@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createGrupalDocDefinition = exports.createIndividualdDocDefinition = void 0;
 const styles = {
     text_header: {
         fontSize: 18,
@@ -14,7 +11,7 @@ const styles = {
     },
 };
 // Individual Document Definition 
-function createIndividualdDocDefinition(prestamo) {
+export function createIndividualdDocDefinition(prestamo) {
     const individualDocDefinition = {
         info: {
             title: `Autorización de Prestamo - ${prestamo.nombre} ${prestamo.apellido} - ${prestamo.fecha}`,
@@ -137,9 +134,8 @@ function createIndividualdDocDefinition(prestamo) {
     };
     return individualDocDefinition;
 }
-exports.createIndividualdDocDefinition = createIndividualdDocDefinition;
 // Grupal Document Definition
-function createGrupalDocDefinition(prestamos, from, to) {
+export function createGrupalDocDefinition(prestamos, from, to) {
     function generateTableBody(prestamosArr) {
         var body = [];
         var titulos = ["Expediente", "Fecha", "Nombre y Apellido", "Cedula", "100%", "Gastos Administrativos",
@@ -193,4 +189,3 @@ function createGrupalDocDefinition(prestamos, from, to) {
     };
     return grupalDocDefinition;
 }
-exports.createGrupalDocDefinition = createGrupalDocDefinition;

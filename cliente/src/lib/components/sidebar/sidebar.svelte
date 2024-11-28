@@ -5,6 +5,7 @@
     import { sidebarSections, clickOutside, type UserRoles } from "./sidebar.ts"
     import { userInfo } from "../../../stores/user.ts"
     import { onDestroy, onMount } from 'svelte';
+    import { base } from '$lib';
     
     let userID = 0
     let userNombre = "Nombre"
@@ -33,7 +34,7 @@
     }
 
     async function logout() {
-        const response  = await fetch("http://localhost:2606/logout", {
+        const response  = await fetch(`${base}/logout`, {
             method: "GET",
             credentials: 'include'
         })   

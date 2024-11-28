@@ -3,6 +3,7 @@
     import { getPreguntas } from "./preguntas"; 
     import { quintOut } from "svelte/easing";
     import ServerMessage from "../ServerMessage/ServerMessage.svelte";
+    import { base } from "$lib";
 
     export let username: string;
 
@@ -26,7 +27,7 @@
 
     async function handleSubmit() {
         try {
-            const response = await fetch("http://localhost:2606/register/securityQuestions", {
+            const response = await fetch(`${base}/register/securityQuestions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

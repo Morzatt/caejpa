@@ -4,6 +4,7 @@
     import Tooltip1 from "$lib/components/tooltip/Tooltip1.svelte"
     import searchIcon from "$lib/images/search_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import sendIcon from "$lib/images/send_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+    import {base} from "$lib/index"
 	// 
     let serverStatus = 400;
 	let warningState = false;
@@ -22,13 +23,13 @@
     $: operationCounter = 0
     let searchParams = ""
     async function getRetirados(){
-        const response = await fetch(`http://localhost:2606/afiliados/retirados/*?searchParams=${searchParams.toLowerCase()}`)
+        const response = await fetch(`${base}/afiliados/retirados/*?searchParams=${searchParams.toLowerCase()}`)
         const data = await response.json()
         return data
     }
 
     async function getReingresados(){
-        const response = await fetch(`http://localhost:2606/afiliados/reingreso?searchParams=${searchParams.toLowerCase()}`)
+        const response = await fetch(`${base}/afiliados/reingreso?searchParams=${searchParams.toLowerCase()}`)
         const data = await response.json()
         return data
     }
@@ -52,7 +53,7 @@
             return
         }
         try {
-            const response = await fetch(`http://localhost:2606/afiliados/reingreso`, {
+            const response = await fetch(`${base}/afiliados/reingreso`, {
                 method: "POST",
 				headers: {
 					'Content-Type': 'application/json',

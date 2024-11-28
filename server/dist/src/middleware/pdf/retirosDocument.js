@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createRetirosDocDefinition = void 0;
 const styles = {
     text_header: {
         fontSize: 18,
@@ -14,7 +11,7 @@ const styles = {
     },
 };
 // Grupal Document Definition
-function createRetirosDocDefinition(retiros, from, to) {
+export function createRetirosDocDefinition(retiros, from, to) {
     function generateTableBody(retirosArr) {
         var body = [];
         var titulos = ["Afiliado", "Fecha", "Cedula", "Total", "Motivo", "Modalidad", "Referencia"]; // Static headers
@@ -65,4 +62,3 @@ function createRetirosDocDefinition(retiros, from, to) {
     };
     return grupalDocDefinition;
 }
-exports.createRetirosDocDefinition = createRetirosDocDefinition;

@@ -1,5 +1,6 @@
 <script lang="ts">
     import ServerMessage from "$lib/components/ServerMessage/ServerMessage.svelte"
+    import { base } from "$lib/index"
 
     // Images Import
     import fileUploadIcon from "$lib/images/upload_file_24dp_FILL0_wght400_GRAD0_opsz24.svg"
@@ -21,20 +22,20 @@
     
     async function handleSubmit () {
         try {
-            let request = await fetch("http://localhost:2606/backup/create", {
+            let request = await fetch(`${base}/backup/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
-                credentials: "include",
+                credentials: `include`,
             });
 
             const data = await request.json()
             if (request.status === 200) {
                 setTimeout(() => {
                     const link = document.createElement('a');
-                    link.href = "http://localhost:2606/backup/download";
+                    link.href = `${base}/backup/download`;
                     link.download = `backup.sql`; // Set the desired filename
                     link.click();
                 }, 1000)
@@ -57,9 +58,9 @@
     }
 
     let fileData: FileData = {
-        fileName: "",
-        fileSize: "",
-        lastModified: "" 
+        fileName: ``,
+        fileSize: ``,
+        lastModified: `` 
     }
 
     function bindInputData() {
@@ -87,7 +88,7 @@
         
         // Update the input's files with the new FileList
         fileInput.files = dataTransfer.files;        
-        fileData.fileName = ""
+        fileData.fileName = ``
         console.log(fileInput.files)
     }
 
@@ -99,9 +100,9 @@
         formData.append('backup_upload', fileInput.files[0]);
 
         try {
-            let request = await fetch("http://localhost:2606/backup/upload", {
+            let request = await fetch(`${base}/backup/upload`, {
                 method: 'POST',
-                credentials: "include",
+                credentials: `include`,
                 body: formData
             });
 

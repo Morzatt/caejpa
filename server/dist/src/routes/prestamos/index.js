@@ -1,35 +1,32 @@
-"use strict";
 // Routes and configuration for the register page of the app 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.prestamos = void 0;
-const express_1 = require("express");
-const prestamos_1 = require("../../middleware/prestamos");
-exports.prestamos = (0, express_1.Router)();
-exports.prestamos.get("/stats", (req, res) => {
+import { Router } from "express";
+import { insertPrestamo, getPrestamos, individualDownload, grupalDownload, deletePrestamo, sendPrestamosStats } from "../../middleware/prestamos";
+export const prestamos = Router();
+prestamos.get("/stats", (req, res) => {
     try {
-        (0, prestamos_1.sendPrestamosStats)(req, res);
+        sendPrestamosStats(req, res);
     }
     catch (err) {
         console.log(`${err}`);
     }
 });
-exports.prestamos.post("/", (req, res) => {
+prestamos.post("/", (req, res) => {
     try {
-        (0, prestamos_1.insertPrestamo)(req, res);
+        insertPrestamo(req, res);
     }
     catch (err) {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.post("/createPrestamo", (req, res) => {
+prestamos.post("/createPrestamo", (req, res) => {
     try {
-        (0, prestamos_1.individualDownload)(req, res);
+        individualDownload(req, res);
     }
     catch (err) {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.get("/downloadPrestamo", (req, res) => {
+prestamos.get("/downloadPrestamo", (req, res) => {
     try {
         res.download("./individualReport.pdf", (err) => {
             if (err) {
@@ -44,15 +41,15 @@ exports.prestamos.get("/downloadPrestamo", (req, res) => {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.post("/createPrestamos", (req, res) => {
+prestamos.post("/createPrestamos", (req, res) => {
     try {
-        (0, prestamos_1.grupalDownload)(req, res);
+        grupalDownload(req, res);
     }
     catch (err) {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.get("/downloadPrestamos", (req, res) => {
+prestamos.get("/downloadPrestamos", (req, res) => {
     try {
         res.download("./grupalReport.pdf", (err) => {
             if (err) {
@@ -67,17 +64,17 @@ exports.prestamos.get("/downloadPrestamos", (req, res) => {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.get("/:id", (req, res) => {
+prestamos.get("/:id", (req, res) => {
     try {
-        (0, prestamos_1.getPrestamos)(req, res);
+        getPrestamos(req, res);
     }
     catch (err) {
         console.log(`And error has ocorred while sending the post request ${err}`);
     }
 });
-exports.prestamos.delete("/:id", (req, res) => {
+prestamos.delete("/:id", (req, res) => {
     try {
-        (0, prestamos_1.deletePrestamo)(req, res);
+        deletePrestamo(req, res);
     }
     catch (err) {
         console.log(`And error has ocorred while sending the post request ${err}`);

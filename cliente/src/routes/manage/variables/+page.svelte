@@ -1,9 +1,10 @@
 <script lang="ts">
+    import {base} from "$lib/index.ts"
     import ServerMessage from '$lib/components/ServerMessage/ServerMessage.svelte';
 
     let operationsCounter = 0
     async function getVariables() {
-        const variablesRequest = await fetch("http://localhost:2606/variables")
+        const variablesRequest = await fetch(`${base}/variables`)
         const variables = await variablesRequest.json()       
         return variables
     }
@@ -27,7 +28,7 @@
 
     async function gastosAdministrativos() {
         try {
-            const response = await fetch('http://localhost:2606/variables/modify/gastos_administrativos', {
+            const response = await fetch(`${base}/variables/modify/gastos_administrativos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +55,7 @@
 
     async function transferenciaEfectiva() {
         try {
-            const response = await fetch('http://localhost:2606/variables/modify/transferencia_efectiva', {
+            const response = await fetch(`${base}/variables/modify/transferencia_efectiva`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +82,7 @@
 
     async function porcentajeIntereses() {
         try {
-            const response = await fetch('http://localhost:2606/variables/modify/porcentaje_intereses', {
+            const response = await fetch(`${base}/variables/modify/porcentaje_intereses`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

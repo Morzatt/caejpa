@@ -1,21 +1,9 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.prestamos = void 0;
-const mysqlConnection_1 = require("../mysqlConnection");
-function prestamos() {
-    const insertPrestamo = (prestamo) => __awaiter(this, void 0, void 0, function* () {
+import { pool } from "../mysqlConnection";
+export function prestamos() {
+    const insertPrestamo = async (prestamo) => {
         try {
             const query = "INSERT INTO prestamos(`expediente`, `fecha`, `nombre`, `apellido`, `cedula`, `cantidad`, `gastos_admin`, `servicio_transf`, `porcentaje_intereses`, `monto_intereses`, `monto_pago`, `tiempo_pago`, `cuota_mensual`, `cuota_quincenal`, `concepto`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            const result = yield mysqlConnection_1.pool.query(query, [
+            const result = await pool.query(query, [
                 prestamo.expediente,
                 prestamo.fecha,
                 prestamo.nombre,
@@ -37,8 +25,8 @@ function prestamos() {
             console.log(`An error has ocurred when selecting the values for the selectUser query: ${err}`);
             throw err;
         }
-    });
-    const getPrestamos = (from, to, campo, orden) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getPrestamos = async (from, to, campo, orden) => {
         try {
             const query = ` SELECT id, expediente, DATE_FORMAT(fecha, "%d/%m/%Y") as fecha, 
                                    nombre, apellido, cedula, cantidad, gastos_admin, servicio_transf,
@@ -48,7 +36,7 @@ function prestamos() {
                             FROM prestamos 
                             WHERE fecha BETWEEN ? AND ?
                             ORDER BY prestamos.${campo ? campo : "fecha"} ${orden ? orden : "ASC"};`;
-            const [result] = yield mysqlConnection_1.pool.query(query, [from, to]);
+            const [result] = await pool.query(query, [from, to]);
             if (result[0] != null) {
                 const prestamos = result.map(prestamo => {
                     return {
@@ -81,8 +69,8 @@ function prestamos() {
             console.log(`An error has ocurred when selecting the values for the selectUser query: ${err}`);
             throw err;
         }
-    });
-    const getPrestamo = (prestamoId) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getPrestamo = async (prestamoId) => {
         try {
             const query = ` SELECT id, expediente, DATE_FORMAT(fecha, "%d/%m/%Y") as fecha, 
                                    nombre, apellido, cedula, cantidad, gastos_admin, servicio_transf,
@@ -90,7 +78,7 @@ function prestamos() {
                                    cuota_mensual, cuota_quincenal, concepto 
                             FROM prestamos 
                             WHERE id = ?;`;
-            const [result] = yield mysqlConnection_1.pool.query(query, [prestamoId]);
+            const [result] = await pool.query(query, [prestamoId]);
             const prestamo = result.map(prestamo => {
                 return {
                     id: prestamo.id,
@@ -117,28 +105,28 @@ function prestamos() {
             console.log(`An error has ocurred when selecting the values for the selectUser query: ${err}`);
             throw err;
         }
-    });
-    const deletePrestamo = (id) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const deletePrestamo = async (id) => {
         try {
             const query = "DELETE FROM prestamos WHERE id = ?";
-            const [result, fields] = yield mysqlConnection_1.pool.query(query, id);
+            const [result, fields] = await pool.query(query, id);
             console.log(result);
         }
         catch (err) {
             console.log("Se ha producido un error al intentar eliminar el prestamo");
             throw err;
         }
-    });
-    const getPrestamosInfo = (from, to) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getPrestamosInfo = async (from, to) => {
         const query = `SELECT COUNT(*) as result FROM prestamos WHERE fecha BETWEEN ? AND ? `;
         try {
-            const [result, fields] = yield mysqlConnection_1.pool.query(query, [from, to]);
+            const [result, fields] = await pool.query(query, [from, to]);
             return result[0];
         }
         catch (err) {
             console.log(err);
         }
-    });
+    };
     return {
         getPrestamosInfo,
         insertPrestamo,
@@ -147,4 +135,3 @@ function prestamos() {
         deletePrestamo
     };
 }
-exports.prestamos = prestamos;

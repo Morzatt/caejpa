@@ -6,6 +6,7 @@
 <script lang="ts">
     import "../app.css"
     import userInfo from "../stores/user"
+    import {base} from "$lib/index"
 
     // Components Import
     import ServerMessage from "$lib/components/ServerMessage/ServerMessage.svelte";
@@ -93,7 +94,7 @@
                     return 
                 }
             }
-			const response = await fetch(isChecked ? 'http://localhost:2606/login' : "http://localhost:2606/register", {
+			const response = await fetch(isChecked ? `${base}/login` : `${base}/register`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

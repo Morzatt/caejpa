@@ -22,6 +22,7 @@
     import mensualIcon from "$lib/images/savings_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import quincenalIcon from "$lib/images/savings_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import conceptoIcon from "$lib/images/description_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+    import { base } from "$lib";
 
 
     function closeTab() {
@@ -29,7 +30,7 @@
     }
  
     async function getPrestamo(): Promise<PrestamoInfo> {
-        const response = await fetch(`http://localhost:2606/prestamos/${id}`)
+        const response = await fetch(`${base}/prestamos/${id}`)
         const data: PrestamoInfo = await response.json()
         return data
     }
@@ -40,7 +41,7 @@
     }
 
     async function deletePrestamo() {
-        const response = await fetch(`http://localhost:2606/prestamos/${id}`, {
+        const response = await fetch(`${base}/prestamos/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

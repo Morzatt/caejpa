@@ -1,44 +1,41 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.usuarios = void 0;
-const express_1 = require("express");
-const usuarios_1 = require("../../middleware/usuarios");
-exports.usuarios = (0, express_1.Router)();
-exports.usuarios.get("/:id", (req, res) => {
+import { Router } from "express";
+import { editUser, getUsers, deleteUser, blockUser, unlockUser } from "../../middleware/usuarios";
+export const usuarios = Router();
+usuarios.get("/:id", (req, res) => {
     try {
-        (0, usuarios_1.getUsers)(req, res);
+        getUsers(req, res);
     }
     catch (err) {
         console.log(`An error has ocurred with the GET /prestamos/variables route`);
     }
 });
-exports.usuarios.patch("/:id", (req, res) => {
+usuarios.patch("/:id", (req, res) => {
     try {
-        (0, usuarios_1.editUser)(req, res);
+        editUser(req, res);
     }
     catch (err) {
         console.log(`An error has ocurred with the GET /prestamos/variables route`);
     }
 });
-exports.usuarios.delete("/:id", (req, res) => {
+usuarios.delete("/:id", (req, res) => {
     try {
-        (0, usuarios_1.deleteUser)(req, res);
+        deleteUser(req, res);
     }
     catch (err) {
         console.log(`An error has ocurred with the GET /prestamos/variables route`);
     }
 });
-exports.usuarios.get("/block/:id", (req, res) => {
+usuarios.get("/block/:id", (req, res) => {
     try {
-        (0, usuarios_1.blockUser)(req, res);
+        blockUser(req, res);
     }
     catch (err) {
         console.log(`An error has ocurred with the GET /prestamos/variables route`);
     }
 });
-exports.usuarios.get("/unlock/:id", (req, res) => {
+usuarios.get("/unlock/:id", (req, res) => {
     try {
-        (0, usuarios_1.unlockUser)(req, res);
+        unlockUser(req, res);
     }
     catch (err) {
         console.log(`An error has ocurred with the GET /prestamos/variables route`);

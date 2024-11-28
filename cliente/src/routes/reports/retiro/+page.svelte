@@ -9,6 +9,7 @@
     import editIcon from "$lib/images/edit_note_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import searchIcon from "$lib/images/search_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import deleteIcon from "$lib/images/delete_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+    import { base } from "$lib";
 
     let deleteConfirmationTab = false; 
     
@@ -42,7 +43,7 @@
     let orden: Orden = "ASC"; 
 
     async function getRetiros() {
-        let response = await fetch(`http://localhost:2606/retiros/*?from=${from}&to=${to}&campo=${campo}&orden=${orden}&search=${search.toLowerCase()}`);
+        let response = await fetch(`${base}/retiros/*?from=${from}&to=${to}&campo=${campo}&orden=${orden}&search=${search.toLowerCase()}`);
         const data = await response.json()
         if (response.status === 200) {
             showWarning(data.message, response.status)
@@ -52,7 +53,7 @@
 
     let idToDelete: number | undefined;
     async function deleteRetiro() {
-        let response = await fetch(`http://localhost:2606/retiros/${idToDelete}`, {method: "DELETE"})
+        let response = await fetch(`${base}/retiros/${idToDelete}`, {method: "DELETE"})
         const data = await response.json()
         console.log(data)
         if (response.status === 200) {
@@ -66,12 +67,12 @@
     }
 
     async function grupalDownload() {
-        let response = await fetch(`http://localhost:2606/retiros/report?from=${from}&to=${to}`);
+        let response = await fetch(`${base}/retiros/report?from=${from}&to=${to}`);
         let data = await response.json()
         if (response.status === 200) {
             setTimeout(() => {
                 const link = document.createElement('a');
-                link.href = "http://localhost:2606/retiros/download";
+                link.href = `${base}/retiros/download`;
                 link.download = 'retirosReport.pdf'; // Set the desired filename
                 link.click();
                 link.remove()

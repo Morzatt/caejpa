@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { base } from "$lib";
     import ServerMessage from "$lib/components/ServerMessage/ServerMessage.svelte"
 
     type Usuario = {
@@ -33,17 +34,17 @@
     let newRole = ""
 
     async function getUsers(): Promise<Usuario[] | null> {
-        const response = await fetch("http://localhost:2606/usuarios/*")
+        const response = await fetch(`${base}/usuarios/*`)
         const data = await response.json() as Usuario[]
         return data
     }
     async function getUser(id: number | string): Promise<Usuario | null> {
-        const response = await fetch(`http://localhost:2606/usuarios/${id}`)
+        const response = await fetch(`${base}/usuarios/${id}`)
         const data = await response.json() as Usuario
         return data
     }
     async function blockUser(id: number | string) {
-        const response = await fetch(`http://localhost:2606/usuarios/block/${id}`)
+        const response = await fetch(`${base}/usuarios/block/${id}`)
         const data = await response.json()
         if (response.status === 200) {
             showWarning(data.message, response.status)
@@ -53,7 +54,7 @@
         }
     }
     async function unlockUser(id: number | string) {
-        const response = await fetch(`http://localhost:2606/usuarios/unlock/${id}`)
+        const response = await fetch(`${base}/usuarios/unlock/${id}`)
         const data = await response.json()
         if (response.status === 200) {
             showWarning(data.message, response.status)
@@ -64,7 +65,7 @@
     }
 
     async function modifyUser (id: string |number) {
-        const response = await fetch(`http://localhost:2606/usuarios/${id}?nombre=${newNombre}&apellido=${newApellido}&username=${newUsername}&role=${newRole}`, {
+        const response = await fetch(`${base}/usuarios/${id}?nombre=${newNombre}&apellido=${newApellido}&username=${newUsername}&role=${newRole}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -86,7 +87,7 @@
     }
     let deleteConfirmationTab = false
     async function deleteUser (id: string |number = userToDelete) {
-        const response = await fetch(`http://localhost:2606/usuarios/${id}`, {method: "delete"})
+        const response = await fetch(`${base}/usuarios/${id}`, {method: "delete"})
         const data = await response.json()
         if (response.status === 200) {
             showWarning(data.message, response.status)

@@ -4,6 +4,7 @@
 
 import app from "./src/server";
 import config from "./src/config"
+import express from "express"
 
 const startServer = () => {
     try {

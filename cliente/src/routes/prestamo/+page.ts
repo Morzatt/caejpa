@@ -5,11 +5,12 @@ import arrowDown from "./images/keyboard_double_arrow_down_FILL0_wght400_GRAD0_o
 
 
 import type { PageLoad } from './$types';
+import { base } from "$lib/index";
 
 export const load = (async () => {
     try {
         // Request to get all the variables 
-        const variablesRequest = await fetch("http://localhost:2606/variables")
+        const variablesRequest = await fetch(`${base}/variables`)
         const variables = await variablesRequest.json()
         return {
             variables,

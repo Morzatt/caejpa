@@ -4,6 +4,7 @@
 	import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
     import Tooltip1 from "../tooltip/Tooltip1.svelte";
+    import { base } from "$lib";
 
     $: username = "";
     let pregunta1 = ""
@@ -37,7 +38,7 @@
     }
 
     async function getQuestions(username:string) {
-        const request = await fetch("http://localhost:2606/register/getUserSecurityQuestions", {
+        const request = await fetch(`${base}/register/getUserSecurityQuestions`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -54,7 +55,7 @@
 
 	async function handleSubmit() {
 		try {
-			const response = await fetch("http://localhost:2606/register/passwordRecovery", {
+			const response = await fetch(`${base}/register/passwordRecovery`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

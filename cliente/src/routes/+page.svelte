@@ -1,5 +1,6 @@
 <script>
     import Chart from "svelte-frappe-charts"
+    import {base} from "$lib/index"
     import manualIcon from "$lib/images/developer_guide_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import prestamoIcon from "$lib/images/payments_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import retirosIcon from "$lib/images/account_balance_wallet_24dp_FILL0_wght400_GRAD0_opsz24.svg"
@@ -7,17 +8,17 @@
     import leaveIcon from "$lib/images/move_item_24dp_FILL0_wght400_GRAD0_opsz24.svg" 
 
     async function getRetirosData() {
-        const response = await fetch("http://localhost:2606/retiros/stats")
+        const response = await fetch(`${base}/retiros/stats`)
         const data = await response.json()
         return data 
     }
     async function getPrestamosData() {
-        const response = await fetch("http://localhost:2606/prestamos/stats")
+        const response = await fetch(`${base}/prestamos/stats`)
         const data = await response.json()
         return data 
     }
     async function getReingresosData() {
-        const response = await fetch("http://localhost:2606/retiros/reingresos/stats")
+        const response = await fetch(`${base}/retiros/reingresos/stats`)
         const data = await response.json()
         return data 
     }

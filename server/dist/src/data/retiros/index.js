@@ -1,22 +1,10 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.retiros = void 0;
-const mysqlConnection_1 = require("../mysqlConnection");
-function retiros() {
-    const insertRetiro = (retiro) => __awaiter(this, void 0, void 0, function* () {
+import { pool } from "../mysqlConnection";
+export function retiros() {
+    const insertRetiro = async (retiro) => {
         const { nombre, apellido, fecha, cedula, total, motivo, modalidad, referencia } = retiro;
         try {
             const query = `INSERT INTO retiros (nombre, apellido, fecha, cedula, total, motivo, modalidad, referencia) VALUES (?,?,?, ?, ?, ?, ?, ?);`;
-            const [response, fields] = yield mysqlConnection_1.pool.query(query, [
+            const [response, fields] = await pool.query(query, [
                 nombre, apellido, fecha, cedula, total, motivo, modalidad, referencia
             ]);
         }
@@ -24,15 +12,15 @@ function retiros() {
             console.log(`${err}`);
             throw err;
         }
-    });
-    const getRetiros = (from, to, campo, orden) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getRetiros = async (from, to, campo, orden) => {
         try {
             const query = ` SELECT id , DATE_FORMAT(fecha, "%d/%m/%Y") as fecha, 
                                    nombre, apellido, cedula, total, motivo, modalidad, referencia
                             FROM retiros 
                             WHERE fecha BETWEEN ? AND ?
                             ORDER BY retiros.${campo ? campo : "fecha"} ${orden ? orden : "ASC"};`;
-            const [response, fields] = yield mysqlConnection_1.pool.query(query, [from, to]);
+            const [response, fields] = await pool.query(query, [from, to]);
             if (response !== null) {
                 const result = response.map((row) => {
                     return {
@@ -57,11 +45,11 @@ function retiros() {
             console.log(`${err}`);
             throw err;
         }
-    });
-    const getRetiro = (id) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getRetiro = async (id) => {
         try {
             const query = `SELECT FROM retiros WHERE id = ?`;
-            const [response, fields] = yield mysqlConnection_1.pool.query(query, id);
+            const [response, fields] = await pool.query(query, id);
             if (response !== null) {
                 const result = response.map((row) => {
                     return {
@@ -86,27 +74,27 @@ function retiros() {
             console.log(`${err}`);
             throw err;
         }
-    });
-    const deleteRetiro = (id) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const deleteRetiro = async (id) => {
         try {
             const query = `DELETE FROM retiros WHERE id = ?`;
-            const [response, fields] = yield mysqlConnection_1.pool.query(query, id);
+            const [response, fields] = await pool.query(query, id);
         }
         catch (err) {
             console.log(`${err}`);
             throw err;
         }
-    });
-    const getRetirosInfo = (from, to, motivo) => __awaiter(this, void 0, void 0, function* () {
+    };
+    const getRetirosInfo = async (from, to, motivo) => {
         const query = `SELECT COUNT(*) as result FROM retiros WHERE fecha BETWEEN ? AND ? AND motivo = ?`;
         try {
-            const [result, fields] = yield mysqlConnection_1.pool.query(query, [from, to, motivo]);
+            const [result, fields] = await pool.query(query, [from, to, motivo]);
             return result[0];
         }
         catch (err) {
             console.log(err);
         }
-    });
+    };
     return {
         getRetirosInfo,
         insertRetiro,
@@ -115,4 +103,3 @@ function retiros() {
         deleteRetiro
     };
 }
-exports.retiros = retiros;

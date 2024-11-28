@@ -12,14 +12,7 @@ import { afiliados } from "./afiliados";
 import { retiros } from "./retiros"
 import { usuarios } from "./usuarios";
 
-const router = Router();
-
-router.get("/", (req: Request, res: Response) => {
-    res.send({m: "22222"})
-})
-
 export {
-    router,
     register,
     login,
     logout,

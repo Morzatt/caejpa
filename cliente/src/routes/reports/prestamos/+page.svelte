@@ -9,6 +9,7 @@
     // Images Import
     import editIcon from "$lib/images/edit_note_24dp_FILL0_wght400_GRAD0_opsz24.svg"
     import searchIcon from "$lib/images/search_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+    import { base } from '$lib';
 
     let prestamoEditionTabState = false; 
     let idProp: string | number;
@@ -56,7 +57,7 @@
     let orden: Orden = "ASC"; 
 
     async function getPrestamos() {
-        let response = await fetch(`http://localhost:2606/prestamos/*?from=${from}&to=${to}&campo=${campo}&orden=${orden}&search=${search.toLowerCase()}`);
+        let response = await fetch(`${base}/prestamos/*?from=${from}&to=${to}&campo=${campo}&orden=${orden}&search=${search.toLowerCase()}`);
         const data = await response.json()
         if (response.status === 200) {
             showWarning(data.message, response.status)
@@ -65,13 +66,13 @@
     }
     
     async function individualDownload(prestamoId: any) {
-        let response = await fetch("http://localhost:2606/prestamos/createPrestamo", {
+        let response = await fetch(`${base}/prestamos/createPrestamo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            credentials: "include",
+            credentials: `include`,
             body: JSON.stringify({ 
                 prestamoId: prestamoId
             })
@@ -80,7 +81,7 @@
         if (response.status === 200) {
             setTimeout(() => {
                 const link = document.createElement('a');
-                link.href = "http://localhost:2606/prestamos/downloadPrestamo";
+                link.href = `${base}/prestamos/downloadPrestamo`;
                 link.download = 'individualReport.pdf'; // Set the desired filename
                 link.click();
             }, 1000)
@@ -91,13 +92,13 @@
     }
 
     async function grupalDownload() {
-        let response = await fetch("http://localhost:2606/prestamos/createPrestamos", {
+        let response = await fetch(`${base}/prestamos/createPrestamos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            credentials: "include",
+            credentials: `include`,
             body: JSON.stringify({ 
                 from: from,
                 to: to
@@ -107,7 +108,7 @@
         if (response.status === 200) {
             setTimeout(() => {
                 const link = document.createElement('a');
-                link.href = "http://localhost:2606/prestamos/downloadPrestamos";
+                link.href = `${base}/prestamos/downloadPrestamos`;
                 link.download = 'individualReport.pdf'; // Set the desired filename
                 link.click();
                 link.remove()
